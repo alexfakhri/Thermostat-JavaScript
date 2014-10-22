@@ -14,12 +14,13 @@ Thermostat.prototype.decreaseTemperature = function() {
 
 Thermostat.prototype.increaseTemperatureBy = function(degrees) {
 	this.temperature += degrees
-	
+	if(this.temperature > 25 && this.isPowerSaverOn === true) return new Error("Power saving mode is ON. Cannot exceed 25 degrees");
+	if(this.temperature > 32 && this.isPowerSaverOn === false) return new Error("Cannot exceed 32 degrees");
 };
 
 Thermostat.prototype.decreaseTemperatureBy = function(degrees) {
 	this.temperature -= degrees;
-	
+	if(this.temperature < 10) return new Error("Cannot exceed minimum temperature of 10");
 };
 
 

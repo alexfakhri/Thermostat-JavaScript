@@ -21,6 +21,7 @@ describe('Thermostat', function() {
 		it('power saving mode will be on', function() {
 			expect(thermostat.isPowerSaverOn).toBe(true);
 		});
+	
 	});
 
 
@@ -62,8 +63,21 @@ describe('Thermostat', function() {
 			expect(thermostat.temperature).toEqual(20);
 		});
 
+	});
+
+	describe('warnings', function(){
+
+		it('with powersaver on, temp cannot exceed 25 degrees', function() {
+			expect(thermostat.increaseTemperatureBy(6)).toEqual(new Error("Power saving mode is ON. Cannot exceed 25 degrees"));
+		});
+
+		it('with powersaver off, temp cannot exceed 32 degrees', function() {
+			thermostat.powerSaverButton("off");
+			expect(thermostat.increaseTemperatureBy(13)).toEqual(new Error("Cannot exceed 32 degrees"));
+		});	
 
 	});
+
 
 
 });
