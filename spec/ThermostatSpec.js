@@ -56,6 +56,12 @@ describe('Thermostat', function() {
 			expect(thermostat.isPowerSaverOn).toBe(true);
 		});
 
+		it('should be able to reset to the default temperature', function(){
+			thermostat.increaseTemperatureBy(10);
+			thermostat.resetToDefaultTemperature();
+			expect(thermostat.temperature).toEqual(20);
+		});
+
 
 	});
 
