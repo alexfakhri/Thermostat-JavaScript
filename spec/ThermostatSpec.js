@@ -56,12 +56,12 @@ describe('Thermostat', function() {
 		});
 
 		it('power saving mode can be turned off', function(){
-			thermostat.powerSaverButton("off");
+			thermostat.powerSaverButtonOff();
 			expect(thermostat.isPowerSaverOn).toBe(false);
 		});
 
 		it('power saver mode can be switched back on', function() {
-			thermostat.powerSaverButton("on");
+			thermostat.powerSaverButtonOn();
 			expect(thermostat.isPowerSaverOn).toBe(true);
 		});
 

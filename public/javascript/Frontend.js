@@ -8,6 +8,10 @@ $('.increase_temperature').on('click', function() {
 	$('.thermostat h2').text(thermostat.increaseTemperature());
 });
 
+$('.decrease_temperature').on('click', function() { 
+	$('.thermostat h2').text(thermostat.decreaseTemperature());
+});
+
 
 
 
