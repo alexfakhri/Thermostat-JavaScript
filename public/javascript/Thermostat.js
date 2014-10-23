@@ -5,7 +5,7 @@ function Thermostat() {
 };
 
 Thermostat.prototype.increaseTemperature = function() {
-	this.increaseTemperatureBy(1);
+	return this.increaseTemperatureBy(1);
 };
 
 Thermostat.prototype.decreaseTemperature = function() {
@@ -13,9 +13,9 @@ Thermostat.prototype.decreaseTemperature = function() {
 };
 
 Thermostat.prototype.increaseTemperatureBy = function(degrees) {
-	this.temperature += degrees
 	if(this.temperature > 25 && this.isPowerSaverOn === true) return new Error("Power saving mode is ON. Cannot exceed 25 degrees");
 	if(this.temperature > 32 && this.isPowerSaverOn === false) return new Error("Cannot exceed 32 degrees");
+	return this.temperature += degrees
 };
 
 Thermostat.prototype.decreaseTemperatureBy = function(degrees) {
