@@ -18,21 +18,29 @@ describe('Thermostat', function() {
 			expect(thermostat.minimumTemperature).toEqual(10);
 		});
 
+		it('should have a maximum temperature of 32 when power saver is off', function() {
+			expect(thermostat.maximumTemperature).toEqual(32)
+		});
+	
 		it('power saving mode will be on', function() {
 			expect(thermostat.isPowerSaverOn).toBe(true);
 		});
-	
+
+		it('should have a maximum temperature of 25 when power saver is on', function() {
+			expect(thermostat.saverMaxTemp).toEqual(25);
+		});
+
 	});
 
 
 	describe('Custom option', function() {
 
-		it('can increase the temperature by on degree', function() {
+		it('can increase the temperature by one degree', function() {
 			thermostat.increaseTemperature();
 			expect(thermostat.temperature).toEqual(21)
 		});
 
-		it('can decrease the temperature by on degree', function() {
+		it('can decrease the temperature by one degree', function() {
 			thermostat.decreaseTemperature();
 			expect(thermostat.temperature).toEqual(19)
 		});
@@ -67,13 +75,17 @@ describe('Thermostat', function() {
 
 	describe('warnings', function(){
 
+		it('cannot go below minimum temperature', function() {
+			expect(thermostat.decreaseTemperatureBy(11)).toEqual(10)
+		});
+
 		it('with powersaver on, temp cannot exceed 25 degrees', function() {
-			expect(thermostat.increaseTemperatureBy(6)).toEqual(new Error("Power saving mode is ON. Cannot exceed 25 degrees"));
+			expect(thermostat.increaseTemperatureBy(6)).toEqual(25);
 		});
 
 		it('with powersaver off, temp cannot exceed 32 degrees', function() {
 			thermostat.powerSaverButton("off");
-			expect(thermostat.increaseTemperatureBy(13)).toEqual(new Error("Cannot exceed 32 degrees"));
+			expect(thermostat.increaseTemperatureBy(13)).toEqual(32);
 		});	
 
 	});
