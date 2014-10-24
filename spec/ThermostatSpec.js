@@ -45,14 +45,14 @@ describe('Thermostat', function() {
 			expect(thermostat.temperature).toEqual(19)
 		});
 
-		it('can increase the temperature by 10 degrees', function(){
-			thermostat.increaseTemperatureBy(10);
-			expect(thermostat.temperature).toEqual(30);
+		it('can increase the temperature by 5 degrees', function(){
+			thermostat.increaseTemperatureBy(5);
+			expect(thermostat.temperature).toEqual(25);
 		});
 
-		it('can decrease the temperature by 10 degrees', function(){
-			thermostat.decreaseTemperatureBy(10);
-			expect(thermostat.temperature).toEqual(10);
+		it('can decrease the temperature by 5 degrees', function(){
+			thermostat.decreaseTemperatureBy(5);
+			expect(thermostat.temperature).toEqual(15);
 		});
 
 		it('power saving mode can be turned off', function(){
@@ -66,7 +66,7 @@ describe('Thermostat', function() {
 		});
 
 		it('should be able to reset to the default temperature', function(){
-			thermostat.increaseTemperatureBy(10);
+			thermostat.increaseTemperatureBy(5);
 			thermostat.resetToDefaultTemperature();
 			expect(thermostat.temperature).toEqual(20);
 		});
@@ -80,12 +80,13 @@ describe('Thermostat', function() {
 		});
 
 		it('with powersaver on, temp cannot exceed 25 degrees', function() {
-			expect(thermostat.increaseTemperatureBy(6)).toEqual(25);
+			thermostat.powerSaverButtonOn();
+			expect(thermostat.increaseTemperatureBy(6)).toEqual('Cannot set above 25 degrees.');
 		});
 
 		it('with powersaver off, temp cannot exceed 32 degrees', function() {
-			thermostat.powerSaverButton("off");
-			expect(thermostat.increaseTemperatureBy(13)).toEqual(32);
+			thermostat.powerSaverButtonOff();
+			expect(thermostat.increaseTemperatureBy(13)).toEqual('Cannot set above 32 degrees.');
 		});	
 
 	});
